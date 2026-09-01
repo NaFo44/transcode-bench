@@ -1,63 +1,69 @@
-import { spawn } from 'node:child_process'
+import { spawn } from 'node:child_process';
 
-type Presets = "veryslow" | "slow" | "medium" | "fast" | "veryfast";
+type Presets = 'veryslow' | 'slow' | 'medium' | 'fast' | 'veryfast';
 
 type ProcessInput = {
-    inputPath: string;
-    codec: string;
-    crf: number;
-    preset: Presets;
-    outputPath: string;
-}
+  inputPath: string;
+  codec: string;
+  crf: number;
+  preset: Presets;
+  outputPath: string;
+};
 
 type processOutput = {
-    outputPath: string;
-    durationMs: number;
-}
+  outputPath: string;
+  durationMs: number;
+};
 
 const spawnTranscodingProcess = async ({
-    inputPath,
-    codec,
-    crf,
-    preset,
-    outputPath
+  inputPath,
+  codec,
+  crf,
+  preset,
+  outputPath,
 }: ProcessInput): Promise<processOutput> => {
-    return new Promise((resolve, reject) => {
-        const start = performance.now()
+  return new Promise((resolve, reject) => {
+    const start = performance.now();
 
-        const ffmpeg = spawn('ffmpeg', [
-            '-i', inputPath,
-            '-c:v', codec,
-            '-crf', String(crf),
-            '-preset', preset,
-            '-c:a', 'copy',
-            outputPath,
-        ])
-        
-        ffmpeg.stderr.on("data", (data) => {
-            process.stderr.write(data)
-        })
+    const ffmpeg = spawn('ffmpeg', [
+      '-i',
+      inputPath,
+      '-c:v',
+      codec,
+      '-crf',
+      String(crf),
+      '-preset',
+      preset,
+      '-c:a',
+      'copy',
+      outputPath,
+    ]);
 
-        ffmpeg.on("error", (err) => {
-            console.error("Cloud not spawn FFmpeg process. Make sure FFmpeg is installed"),
-            
-            reject(err)
-        })
+    ffmpeg.stderr.on('data', (data) => {
+      process.stderr.write(data);
+    });
 
-        ffmpeg.on("close", (code) => {
-            if (code !== 0) {
-                reject(new Error(`FFmpeg exited with code ${code}`))
-                return;
-            }
+    ffmpeg.on('error', (err) => {
+      (console.error(
+        'Cloud not spawn FFmpeg process. Make sure FFmpeg is installed',
+      ),
+        reject(err));
+    });
 
-            const durationMs = performance.now() - start
-            
-            resolve ({
-                outputPath,
-                durationMs,
-            })
-        })
-    })
-}
+    ffmpeg.on('close', (code) => {
+      if (code !== 0) {
+        reject(new Error(`FFmpeg exited with code ${code}`));
+        return;
+      }
 
-export { spawnTranscodingProcess }
+      const durationMs = performance.now() - start;
+
+      resolve({
+        outputPath,
+        durationMs,
+      });
+    });
+  });
+};
+
+export { spawnTranscodingProcess };
