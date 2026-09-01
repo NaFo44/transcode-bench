@@ -6,7 +6,7 @@ const inputPath = process.argv[2];
 const configPath = process.argv[3] ?? 'presets/default.json';
 
 if (!inputPath) {
-  console.error('Usage: bun run src/cli.ts <input> <config>');
+  console.error('Usage: bun run start <input> <config>');
   process.exit(1);
 }
 
