@@ -1,4 +1,5 @@
 import { spawnTranscodingProcess } from './lib/ffmpeg';
+import { byteToMb, ratioToPercent } from './lib/utils';
 
 const input = process.argv[2];
 
@@ -18,5 +19,12 @@ const ffmpeg = await spawnTranscodingProcess({
 });
 
 console.log(
-  `Transcoding done. Input: ${input}; Duration: ${ffmpeg.durationMs}; Output: ${ffmpeg.outputPath}`,
+  `Transcoding done.
+   Input Path: ${input};
+   Input Size: ${byteToMb(ffmpeg.inputSize).toFixed(2)} MB
+   Transcoding duration: ${ffmpeg.durationMs};
+   Output Path: ${ffmpeg.outputPath};
+   Output Size: ${byteToMb(ffmpeg.outputSize).toFixed(2)} MB
+   Output/Input ratio: ${ffmpeg.ratio}
+   Compression percentage: ${ratioToPercent(ffmpeg.ratio)}`,
 );

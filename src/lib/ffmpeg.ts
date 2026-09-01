@@ -1,4 +1,5 @@
 import { spawn } from 'node:child_process';
+import { stat } from 'node:fs/promises';
 
 type Presets = 'veryslow' | 'slow' | 'medium' | 'fast' | 'veryfast';
 
@@ -10,18 +11,21 @@ type ProcessInput = {
   outputPath: string;
 };
 
-type processOutput = {
+type ProcessOutput = {
   outputPath: string;
   durationMs: number;
+  outputSize: number;
+  inputSize: number;
+  ratio: number;
 };
 
-const spawnTranscodingProcess = async ({
+const spawnTranscodingProcess = ({
   inputPath,
   codec,
   crf,
   preset,
   outputPath,
-}: ProcessInput): Promise<processOutput> => {
+}: ProcessInput): Promise<ProcessOutput> => {
   return new Promise((resolve, reject) => {
     const start = performance.now();
 
@@ -44,24 +48,34 @@ const spawnTranscodingProcess = async ({
     });
 
     ffmpeg.on('error', (err) => {
-      (console.error(
-        'Cloud not spawn FFmpeg process. Make sure FFmpeg is installed',
-      ),
-        reject(err));
+      console.error(
+        'Could not spawn FFmpeg process. Make sure FFmpeg is installed',
+      );
+      reject(err);
     });
 
-    ffmpeg.on('close', (code) => {
+    ffmpeg.on('close', async (code) => {
       if (code !== 0) {
         reject(new Error(`FFmpeg exited with code ${code}`));
         return;
       }
 
-      const durationMs = performance.now() - start;
+      try {
+        const durationMs = performance.now() - start;
+        const inputStats = await stat(inputPath);
+        const outputStats = await stat(outputPath);
+        const ratio = outputStats.size / inputStats.size;
 
-      resolve({
-        outputPath,
-        durationMs,
-      });
+        resolve({
+          outputPath,
+          durationMs,
+          outputSize: outputStats.size,
+          inputSize: inputStats.size,
+          ratio,
+        });
+      } catch (err) {
+        reject(err);
+      }
     });
   });
 };
