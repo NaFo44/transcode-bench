@@ -2,6 +2,14 @@
 
 This project is implementing an FFmpeg transcoding benchmark to compare different configuration.
 
+## Requirements
+
+- Bun 1.3.10
+- FFmpeg
+- FFprobe
+
+## Quick setup
+
 To install dependencies:
 
 ```bash
