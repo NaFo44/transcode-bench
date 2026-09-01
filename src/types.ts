@@ -13,12 +13,18 @@ export type ProcessOutput = {
   durationMs: number;
   outputSize: number;
   inputSize: number;
-  ratio: number;
 };
 
-type BenchmarkConfig = {
+export type BenchmarkResult = {
   name: string;
   codec: string;
   crf: number;
   preset: Presets;
+  inputPath: string;
+  inputSizeMb: number;
+  outputPath: string;
+  outputSizeMb: number;
+  durationMs: number;
+  ratio: number;
+  compressionPercentage: number;
 };

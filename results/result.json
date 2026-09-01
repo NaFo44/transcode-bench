@@ -1,0 +1,41 @@
+[
+  {
+    "name": "x264-medium-crf23",
+    "codec": "libx264",
+    "crf": 23,
+    "preset": "medium",
+    "inputPath": "video.mp4",
+    "inputSizeMb": 2.401801109313965,
+    "outputPath": "output/x264-medium-crf23.mp4",
+    "outputSizeMb": 2.043257713317871,
+    "durationMs": 1842.911,
+    "ratio": 0.850718948123683,
+    "compressionPercentage": 14.93
+  },
+  {
+    "name": "x264-fast-crf23",
+    "codec": "libx264",
+    "crf": 23,
+    "preset": "fast",
+    "inputPath": "video.mp4",
+    "inputSizeMb": 2.401801109313965,
+    "outputPath": "output/x264-fast-crf23.mp4",
+    "outputSizeMb": 2.0654211044311523,
+    "durationMs": 1561.0052999999998,
+    "ratio": 0.8599467692897794,
+    "compressionPercentage": 14.01
+  },
+  {
+    "name": "x264-slow-crf23",
+    "codec": "libx264",
+    "crf": 23,
+    "preset": "slow",
+    "inputPath": "video.mp4",
+    "inputSizeMb": 2.401801109313965,
+    "outputPath": "output/x264-slow-crf23.mp4",
+    "outputSizeMb": 2.0115299224853516,
+    "durationMs": 2606.9639,
+    "ratio": 0.8375089488820796,
+    "compressionPercentage": 16.25
+  }
+]

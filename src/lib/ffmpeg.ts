@@ -46,16 +46,14 @@ const spawnTranscodingProcess = ({
 
       try {
         const durationMs = performance.now() - start;
-        const inputStats = await stat(inputPath);
         const outputStats = await stat(outputPath);
-        const ratio = outputStats.size / inputStats.size;
+        const inputStats = await stat(inputPath);
 
         resolve({
           outputPath,
           durationMs,
           outputSize: outputStats.size,
           inputSize: inputStats.size,
-          ratio,
         });
       } catch (err) {
         reject(err);
