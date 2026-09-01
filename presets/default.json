@@ -1,0 +1,22 @@
+{
+  "benchmarks": [
+    {
+      "name": "x264-medium-crf23",
+      "codec": "libx264",
+      "crf": 23,
+      "preset": "medium"
+    },
+    {
+      "name": "x264-fast-crf23",
+      "codec": "libx264",
+      "crf": 23,
+      "preset": "fast"
+    },
+    {
+      "name": "x264-slow-crf23",
+      "codec": "libx264",
+      "crf": 23,
+      "preset": "slow"
+    }
+  ]
+}

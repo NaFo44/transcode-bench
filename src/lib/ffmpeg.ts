@@ -1,23 +1,6 @@
 import { spawn } from 'node:child_process';
 import { stat } from 'node:fs/promises';
-
-type Presets = 'veryslow' | 'slow' | 'medium' | 'fast' | 'veryfast';
-
-type ProcessInput = {
-  inputPath: string;
-  codec: string;
-  crf: number;
-  preset: Presets;
-  outputPath: string;
-};
-
-type ProcessOutput = {
-  outputPath: string;
-  durationMs: number;
-  outputSize: number;
-  inputSize: number;
-  ratio: number;
-};
+import type { ProcessInput, ProcessOutput } from '../types';
 
 const spawnTranscodingProcess = ({
   inputPath,
@@ -30,6 +13,7 @@ const spawnTranscodingProcess = ({
     const start = performance.now();
 
     const ffmpeg = spawn('ffmpeg', [
+      '-y',
       '-i',
       inputPath,
       '-c:v',
