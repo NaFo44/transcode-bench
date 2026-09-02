@@ -20,11 +20,15 @@ export type BenchmarkResult = {
   codec: string;
   crf: number;
   preset: Presets;
-  inputPath: string;
-  inputSizeMb: number;
   outputPath: string;
   outputSizeMb: number;
   durationMs: number;
   ratio: number;
   compressionPercentage: number;
+};
+
+export type BenchmarkResults = {
+  inputPath: string;
+  inputSizeMb: number;
+  results: BenchmarkResult[];
 };
