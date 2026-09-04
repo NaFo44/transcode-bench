@@ -1,5 +1,17 @@
 type Presets = 'veryslow' | 'slow' | 'medium' | 'fast' | 'veryfast';
 
+export type CliArgs = {
+  inputPath: string;
+  configPath: string;
+};
+
+export type BenchmarkConfig = {
+  name: string;
+  codec: string;
+  crf: number;
+  preset: Presets;
+}
+
 export type ProcessInput = {
   inputPath: string;
   codec: string;
