@@ -1,16 +1,11 @@
-type Presets = 'veryslow' | 'slow' | 'medium' | 'fast' | 'veryfast';
-
-export type CliArgs = {
-  inputPath: string;
-  configPath: string;
-};
+export type Presets = 'veryslow' | 'slow' | 'medium' | 'fast' | 'veryfast';
 
 export type BenchmarkConfig = {
   name: string;
   codec: string;
   crf: number;
   preset: Presets;
-}
+};
 
 export type ProcessInput = {
   inputPath: string;
@@ -27,16 +22,33 @@ export type ProcessOutput = {
   inputSize: number;
 };
 
-export type BenchmarkResult = {
+export type TranscodingResult = {
   name: string;
   codec: string;
   crf: number;
   preset: Presets;
   outputPath: string;
-  outputSizeMb: number;
   durationMs: number;
   ratio: number;
-  compressionPercentage: number;
+  reductionPercentage: number;
+};
+
+export type OutputFileMetadata = {
+  codec: string;
+  width: number;
+  height: number;
+  fps: number;
+  bitrate?: number | undefined;
+  size: number;
+};
+
+export type ExtractorInput = {
+  inputPath: string;
+};
+
+export type BenchmarkResult = {
+  transcoding: TranscodingResult;
+  outputFile: OutputFileMetadata;
 };
 
 export type BenchmarkResults = {

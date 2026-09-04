@@ -4,6 +4,7 @@ import { configSchema } from './schemas';
 import { spawnTranscodingProcess } from './lib/ffmpeg';
 import { byteToMb, ratioToPercent } from './lib/utils';
 import type { BenchmarkConfig, BenchmarkResults } from './types';
+import { extractMediaMetadata } from './lib/ffprobe';
 
 type CliArgs = {
   inputPath: string;
@@ -56,20 +57,34 @@ async function runBenchmarks(
       outputPath: `output/${benchmark.name}.mp4`,
     });
 
+    const outputMetadata = await extractMediaMetadata({
+      inputPath: processOutput.outputPath,
+    });
+
     const ratio = processOutput.outputSize / processOutput.inputSize;
 
     results.inputSizeMb = byteToMb(processOutput.inputSize);
 
     results.results.push({
-      name: benchmark.name,
-      codec: benchmark.codec,
-      crf: benchmark.crf,
-      preset: benchmark.preset,
-      outputPath: processOutput.outputPath,
-      outputSizeMb: byteToMb(processOutput.outputSize),
-      durationMs: processOutput.durationMs,
-      ratio,
-      compressionPercentage: ratioToPercent(ratio),
+      transcoding: {
+        name: benchmark.name,
+        codec: benchmark.codec,
+        crf: benchmark.crf,
+        preset: benchmark.preset,
+        outputPath: processOutput.outputPath,
+        durationMs: processOutput.durationMs,
+        ratio,
+        reductionPercentage: ratioToPercent(ratio),
+      },
+
+      outputFile: {
+        codec: outputMetadata.codec,
+        width: outputMetadata.width,
+        height: outputMetadata.height,
+        fps: outputMetadata.fps,
+        bitrate: outputMetadata.bitrate,
+        size: outputMetadata.size,
+      },
     });
   }
 
