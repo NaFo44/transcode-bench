@@ -1,6 +1,7 @@
 import { spawnTranscodingProcess } from './lib/ffmpeg';
 import { byteToMb, ratioToPercent } from './lib/utils';
 import type { BenchmarkResults } from './types';
+import { configSchema } from './schemas';
 
 const inputPath = process.argv[2];
 const configPath = process.argv[3] ?? 'presets/default.json';
@@ -14,7 +15,8 @@ if (!process.argv[3]) {
   console.log(`Config file not specified. Using ${configPath}.`);
 }
 
-const config = await Bun.file(configPath).json();
+const rawConfig = await Bun.file(configPath).json();
+const config = configSchema.parse(rawConfig);
 const benchmarks = config.benchmarks;
 
 const result: BenchmarkResults = {
