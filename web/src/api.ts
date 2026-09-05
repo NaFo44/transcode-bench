@@ -1,6 +1,6 @@
-import type { BenchmarkResults } from '../../src/types/benchmark.types';
+import type { Results } from '../../src/types/benchmark.types';
 
-export async function getResults(): Promise<BenchmarkResults> {
+export async function getResults(): Promise<Results> {
   const response = await fetch('/api/results');
 
   if (!response.ok) {

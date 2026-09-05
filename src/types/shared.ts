@@ -15,11 +15,12 @@ export type ProcessOutput = {
   inputSize: number;
 };
 
-export type OutputFileMetadata = {
+export type MediaMetadata = {
   codec: string;
   width: number;
   height: number;
   fps: number;
   bitrate?: number | undefined;
   size: number;
+  duration: number;
 };

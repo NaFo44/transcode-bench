@@ -1,12 +1,12 @@
 import type {
   BenchmarkConfig,
-  BenchmarkResult,
-  BenchmarkResults,
+  Results,
+  Result,
 } from '../types/benchmark.types';
 import type {
   ProcessInput,
   ProcessOutput,
-  OutputFileMetadata,
+  MediaMetadata,
 } from '../types/shared';
 
 export interface FfmpegRunner {
@@ -15,7 +15,7 @@ export interface FfmpegRunner {
 }
 
 export interface MetadataReader {
-  read(inputPath: string): Promise<OutputFileMetadata>;
+  read(inputPath: string): Promise<MediaMetadata>;
 }
 
 export interface BenchmarkFormatter {
@@ -38,20 +38,23 @@ export class BenchmarkService {
   async runAll(
     inputPath: string,
     configs: BenchmarkConfig[],
-  ): Promise<BenchmarkResults> {
-    const results: BenchmarkResults = {
-      inputPath,
-      inputSizeMb: 0,
-      results: [],
+  ): Promise<Results> {
+    const inputMetadata = await this.metadataReader.read(inputPath);
+
+    const results: Results = {
+      input: {
+        metadata: inputMetadata,
+        name: inputPath,
+      },
+      result: [],
     };
 
     for (const config of configs) {
       const run = await this.runOne(inputPath, config);
-      results.results.push(run);
+      run.performance.speedFactor =
+        inputMetadata.duration / run.performance.durationMs;
+      results.result.push(run);
     }
-
-    const inputSize = await this.ffmpegRunner.getInputSize(inputPath);
-    results.inputSizeMb = inputSize / (1024 * 1024);
 
     return results;
   }
@@ -59,7 +62,7 @@ export class BenchmarkService {
   private async runOne(
     inputPath: string,
     config: BenchmarkConfig,
-  ): Promise<BenchmarkResult> {
+  ): Promise<Result> {
     const output = await this.ffmpegRunner.run({
       inputPath,
       codec: config.codec,
@@ -78,11 +81,17 @@ export class BenchmarkService {
         crf: config.crf,
         preset: config.preset,
         outputPath: output.outputPath,
+      },
+      performance: {
         durationMs: output.durationMs,
+        speedFactor: 0,
+      },
+      compression: {
+        outputSize: metadata.size,
         ratio,
         reductionPercentage: this.formatter.reductionPercent(ratio),
       },
-      outputFile: metadata,
+      output: metadata,
     };
   }
 }

@@ -25,5 +25,6 @@ export const ffprobeSchema = z.object({
   ),
   format: z.object({
     size: z.string(),
+    duration: z.string(),
   }),
 });

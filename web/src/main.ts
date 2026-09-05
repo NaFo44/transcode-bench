@@ -2,8 +2,8 @@ import './style.css';
 
 import { getResults } from './api';
 import type {
-  BenchmarkResult,
-  BenchmarkResults,
+  Results,
+  Result,
 } from '../../src/types/benchmark.types';
 
 function formatDuration(durationMs: number): string {
@@ -20,7 +20,7 @@ function getInputName(inputPath: string): string {
   return inputPath.split(/[\\/]/).pop() ?? inputPath;
 }
 
-function createResultRow(result: BenchmarkResult): HTMLTableRowElement {
+function createResultRow(result: Result): HTMLTableRowElement {
   const row = document.createElement('tr');
 
   const values = [
@@ -28,9 +28,9 @@ function createResultRow(result: BenchmarkResult): HTMLTableRowElement {
     result.transcoding.codec,
     String(result.transcoding.crf),
     result.transcoding.preset,
-    formatSize(byteToMb(result.outputFile.size)),
-    formatDuration(result.transcoding.durationMs),
-    `${result.transcoding.reductionPercentage.toFixed(1)}%`,
+    formatSize(byteToMb(result.compression.outputSize)),
+    formatDuration(result.performance.durationMs),
+    `${result.compression.reductionPercentage.toFixed(1)}%`,
   ];
 
   for (const value of values) {
@@ -44,7 +44,7 @@ function createResultRow(result: BenchmarkResult): HTMLTableRowElement {
   return row;
 }
 
-function renderResults(results: BenchmarkResults): void {
+function renderResults(results: Results): void {
   const inputName = document.querySelector<HTMLElement>('#input-name');
   const inputSize = document.querySelector<HTMLElement>('#input-size');
   const table =
@@ -54,12 +54,12 @@ function renderResults(results: BenchmarkResults): void {
     throw new Error('UI elements not found');
   }
 
-  inputName.textContent = getInputName(results.inputPath);
-  inputSize.textContent = formatSize(results.inputSizeMb);
+  inputName.textContent = getInputName(results.input.name);
+  inputSize.textContent = formatSize(byteToMb(results.input.metadata.size));
 
   table.replaceChildren();
 
-  for (const result of results.results) {
+  for (const result of results.result) {
     table.appendChild(createResultRow(result));
   }
 }

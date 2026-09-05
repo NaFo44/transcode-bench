@@ -1,12 +1,12 @@
 import { ffprobeSchema } from '../schemas';
-import type { OutputFileMetadata } from '../types/shared';
+import type { MediaMetadata } from '../types/shared';
 
 export interface MetadataReader {
-  read(inputPath: string): Promise<OutputFileMetadata>;
+  read(inputPath: string): Promise<MediaMetadata>;
 }
 
 export class MetadataReaderImpl implements MetadataReader {
-  async read(inputPath: string): Promise<OutputFileMetadata> {
+  async read(inputPath: string): Promise<MediaMetadata> {
     const process = Bun.spawn([
       'ffprobe',
       '-v',
@@ -16,7 +16,7 @@ export class MetadataReaderImpl implements MetadataReader {
       '-show_entries',
       'stream=codec_name,width,height,r_frame_rate,bit_rate',
       '-show_entries',
-      'format=size',
+      'format=size, duration',
       '-of',
       'json',
       inputPath,
@@ -59,6 +59,7 @@ export class MetadataReaderImpl implements MetadataReader {
       fps: numerator / denominator,
       bitrate: Number(stream.bit_rate),
       size: Number(safeData.format.size),
+      duration: Number(safeData.format.duration) * 1000,
     };
   }
 }

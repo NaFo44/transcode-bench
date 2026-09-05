@@ -1,25 +1,42 @@
 {
-  "inputPath": "video.mp4",
-  "inputSizeMb": 2.401801109313965,
-  "results": [
+  "input": {
+    "metadata": {
+      "codec": "h264",
+      "width": 640,
+      "height": 360,
+      "fps": 25,
+      "bitrate": 311790,
+      "size": 2518471,
+      "duration": 49040.543999999994
+    },
+    "name": "video.mp4"
+  },
+  "result": [
     {
       "transcoding": {
         "name": "x264-medium-crf23",
         "codec": "libx264",
         "crf": 23,
         "preset": "medium",
-        "outputPath": "output/x264-medium-crf23.mp4",
-        "durationMs": 1925.0528,
+        "outputPath": "output/x264-medium-crf23.mp4"
+      },
+      "performance": {
+        "durationMs": 2052.9849999999997,
+        "speedFactor": 23.887434150760967
+      },
+      "compression": {
+        "outputSize": 2142511,
         "ratio": 0.850718948123683,
         "reductionPercentage": 14.9281051876317
       },
-      "outputFile": {
+      "output": {
         "codec": "h264",
         "width": 640,
         "height": 360,
         "fps": 25,
         "bitrate": 246712,
-        "size": 2142511
+        "size": 2142511,
+        "duration": 49040.543999999994
       }
     },
     {
@@ -28,18 +45,25 @@
         "codec": "libx264",
         "crf": 23,
         "preset": "fast",
-        "outputPath": "output/x264-fast-crf23.mp4",
-        "durationMs": 1460.5012000000002,
+        "outputPath": "output/x264-fast-crf23.mp4"
+      },
+      "performance": {
+        "durationMs": 1586.5284999999994,
+        "speedFactor": 30.910597571994458
+      },
+      "compression": {
+        "outputSize": 2165751,
         "ratio": 0.8599467692897794,
         "reductionPercentage": 14.005323071022058
       },
-      "outputFile": {
+      "output": {
         "codec": "h264",
         "width": 640,
         "height": 360,
         "fps": 25,
         "bitrate": 250506,
-        "size": 2165751
+        "size": 2165751,
+        "duration": 49040.543999999994
       }
     },
     {
@@ -48,18 +72,25 @@
         "codec": "libx264",
         "crf": 23,
         "preset": "slow",
-        "outputPath": "output/x264-slow-crf23.mp4",
-        "durationMs": 2555.2562,
+        "outputPath": "output/x264-slow-crf23.mp4"
+      },
+      "performance": {
+        "durationMs": 2607.2827000000007,
+        "speedFactor": 18.809062784024142
+      },
+      "compression": {
+        "outputSize": 2109242,
         "ratio": 0.8375089488820796,
         "reductionPercentage": 16.24910511179204
       },
-      "outputFile": {
+      "output": {
         "codec": "h264",
         "width": 640,
         "height": 360,
         "fps": 25,
         "bitrate": 241280,
-        "size": 2109242
+        "size": 2109242,
+        "duration": 49040.543999999994
       }
     }
   ]
