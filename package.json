@@ -4,8 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "bun run src/cli.ts",
-    "dev": "bun --watch src/cli.ts",
+    "start": "bun run src/index.ts",
+    "dev": "bun --watch src/index.ts",
     "test": "bun test",
     "format": "prettier --write .",
     "format:check": "prettier --check",

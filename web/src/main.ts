@@ -1,7 +1,10 @@
 import './style.css';
 
 import { getResults } from './api';
-import type { BenchmarkResult, BenchmarkResults } from '../../src/types';
+import type {
+  BenchmarkResult,
+  BenchmarkResults,
+} from '../../src/types/benchmark.types';
 
 function formatDuration(durationMs: number): string {
   return `${(durationMs / 1000).toFixed(2)} s`;
@@ -10,6 +13,8 @@ function formatDuration(durationMs: number): string {
 function formatSize(sizeMb: number): string {
   return `${sizeMb.toFixed(2)} MB`;
 }
+
+const byteToMb = (sizeByte: number) => sizeByte / 1024 / 1024;
 
 function getInputName(inputPath: string): string {
   return inputPath.split(/[\\/]/).pop() ?? inputPath;
@@ -23,7 +28,7 @@ function createResultRow(result: BenchmarkResult): HTMLTableRowElement {
     result.transcoding.codec,
     String(result.transcoding.crf),
     result.transcoding.preset,
-    formatSize(result.outputFile.size),
+    formatSize(byteToMb(result.outputFile.size)),
     formatDuration(result.transcoding.durationMs),
     `${result.transcoding.reductionPercentage.toFixed(1)}%`,
   ];

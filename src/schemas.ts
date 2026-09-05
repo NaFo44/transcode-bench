@@ -14,18 +14,15 @@ export const configSchema = z.object({
 });
 
 export const ffprobeSchema = z.object({
-  streams: z
-    .array(
-      z.object({
-        codec_name: z.string(),
-        width: z.number(),
-        height: z.number(),
-        r_frame_rate: z.string(),
-        bit_rate: z.string().optional(),
-      }),
-    )
-    .min(1),
-
+  streams: z.array(
+    z.object({
+      codec_name: z.string(),
+      width: z.number(),
+      height: z.number(),
+      r_frame_rate: z.string(),
+      bit_rate: z.string().optional(),
+    }),
+  ),
   format: z.object({
     size: z.string(),
   }),
