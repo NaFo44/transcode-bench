@@ -1,3 +1,4 @@
+import { vmafOutputSchema } from '../schemas';
 import type { QualityAnalyser, QualityScore } from '../types/shared';
 import { unlink } from 'node:fs/promises';
 
@@ -32,8 +33,9 @@ export class VmafAnalyserImpl implements QualityAnalyser {
     }
 
     const raw = await Bun.file(logPath).json();
-
-    const score = raw.pooled_metrics?.vmaf?.mean;
+    const parsed = vmafOutputSchema.parse(raw);
+    
+    const score = parsed.pooled_metrics.vmaf.mean;
 
     await unlink(logPath);
 

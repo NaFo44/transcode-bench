@@ -39,10 +39,7 @@ export class BenchmarkService {
     private readonly formatter: BenchmarkFormatter,
   ) {}
 
-  async runAll(
-    inputPath: string,
-    config: ConfigFile,
-  ): Promise<Results> {
+  async runAll(inputPath: string, config: ConfigFile): Promise<Results> {
     const inputMetadata = await this.metadataReader.read(inputPath);
 
     const results: Results = {
@@ -81,7 +78,10 @@ export class BenchmarkService {
     let quality: QualityScore | undefined;
 
     if (enableVmaf) {
-      quality = await this.qualityAnalyser.analyse(inputPath, output.outputPath);
+      quality = await this.qualityAnalyser.analyse(
+        inputPath,
+        output.outputPath,
+      );
     }
 
     const ratio = output.outputSize / output.inputSize;

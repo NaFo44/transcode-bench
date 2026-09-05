@@ -29,3 +29,11 @@ export const ffprobeSchema = z.object({
     duration: z.string(),
   }),
 });
+
+export const vmafOutputSchema = z.object({
+  pooled_metrics: z.object({
+    vmaf: z.object({
+      mean: z.number(),
+    }),
+  }),
+});
