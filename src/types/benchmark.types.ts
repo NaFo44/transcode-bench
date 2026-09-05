@@ -1,4 +1,4 @@
-import type { Presets } from './shared';
+import type { Presets, QualityScore } from './shared';
 import type { MediaMetadata } from './shared';
 
 export type BenchmarkConfig = {
@@ -6,6 +6,11 @@ export type BenchmarkConfig = {
   codec: string;
   crf: number;
   preset: Presets;
+};
+
+export type ConfigFile = {
+  vmaf: boolean;
+  benchmarks: BenchmarkConfig[];
 };
 
 export type TranscodingResult = {
@@ -17,12 +22,11 @@ export type TranscodingResult = {
 };
 
 export type Performance = {
-  durationMs: number;
+  encodingTimeMs: number;
   speedFactor: number;
 };
 
 export type Compression = {
-  outputSize: number;
   ratio: number;
   reductionPercentage: number;
 };
@@ -31,13 +35,14 @@ export type Result = {
   transcoding: TranscodingResult;
   performance: Performance;
   compression: Compression;
+  quality?: QualityScore;
   output: MediaMetadata;
 };
 
 export type Results = {
   input: {
-    metadata: MediaMetadata;
     name: string;
-  }
+    metadata: MediaMetadata;
+  };
   result: Result[];
 };

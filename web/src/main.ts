@@ -1,10 +1,7 @@
 import './style.css';
 
 import { getResults } from './api';
-import type {
-  Results,
-  Result,
-} from '../../src/types/benchmark.types';
+import type { Results, Result } from '../../src/types/benchmark.types';
 
 function formatDuration(durationMs: number): string {
   return `${(durationMs / 1000).toFixed(2)} s`;
@@ -28,8 +25,8 @@ function createResultRow(result: Result): HTMLTableRowElement {
     result.transcoding.codec,
     String(result.transcoding.crf),
     result.transcoding.preset,
-    formatSize(byteToMb(result.compression.outputSize)),
-    formatDuration(result.performance.durationMs),
+    formatSize(byteToMb(result.output.size)),
+    formatDuration(result.performance.encodingTimeMs),
     `${result.compression.reductionPercentage.toFixed(1)}%`,
   ];
 

@@ -1,5 +1,6 @@
 import type {
   BenchmarkConfig,
+  ConfigFile,
   Results,
   Result,
 } from '../types/benchmark.types';
@@ -7,6 +8,8 @@ import type {
   ProcessInput,
   ProcessOutput,
   MediaMetadata,
+  QualityAnalyser,
+  QualityScore,
 } from '../types/shared';
 
 export interface FfmpegRunner {
@@ -32,27 +35,28 @@ export class BenchmarkService {
   constructor(
     private readonly ffmpegRunner: FfmpegRunner,
     private readonly metadataReader: MetadataReader,
+    private readonly qualityAnalyser: QualityAnalyser,
     private readonly formatter: BenchmarkFormatter,
   ) {}
 
   async runAll(
     inputPath: string,
-    configs: BenchmarkConfig[],
+    config: ConfigFile,
   ): Promise<Results> {
     const inputMetadata = await this.metadataReader.read(inputPath);
 
     const results: Results = {
       input: {
-        metadata: inputMetadata,
         name: inputPath,
+        metadata: inputMetadata,
       },
       result: [],
     };
 
-    for (const config of configs) {
-      const run = await this.runOne(inputPath, config);
+    for (const benchmark of config.benchmarks) {
+      const run = await this.runOne(inputPath, benchmark, config.vmaf);
       run.performance.speedFactor =
-        inputMetadata.duration / run.performance.durationMs;
+        inputMetadata.duration / run.performance.encodingTimeMs;
       results.result.push(run);
     }
 
@@ -62,6 +66,7 @@ export class BenchmarkService {
   private async runOne(
     inputPath: string,
     config: BenchmarkConfig,
+    enableVmaf: boolean,
   ): Promise<Result> {
     const output = await this.ffmpegRunner.run({
       inputPath,
@@ -72,6 +77,13 @@ export class BenchmarkService {
     });
 
     const metadata = await this.metadataReader.read(output.outputPath);
+
+    let quality: QualityScore | undefined;
+
+    if (enableVmaf) {
+      quality = await this.qualityAnalyser.analyse(inputPath, output.outputPath);
+    }
+
     const ratio = output.outputSize / output.inputSize;
 
     return {
@@ -83,14 +95,14 @@ export class BenchmarkService {
         outputPath: output.outputPath,
       },
       performance: {
-        durationMs: output.durationMs,
+        encodingTimeMs: output.durationMs,
         speedFactor: 0,
       },
       compression: {
-        outputSize: metadata.size,
         ratio,
         reductionPercentage: this.formatter.reductionPercent(ratio),
       },
+      quality,
       output: metadata,
     };
   }

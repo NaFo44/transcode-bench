@@ -1,5 +1,6 @@
 {
   "input": {
+    "name": "video.mp4",
     "metadata": {
       "codec": "h264",
       "width": 640,
@@ -8,8 +9,7 @@
       "bitrate": 311790,
       "size": 2518471,
       "duration": 49040.543999999994
-    },
-    "name": "video.mp4"
+    }
   },
   "result": [
     {
@@ -21,13 +21,15 @@
         "outputPath": "output/x264-medium-crf23.mp4"
       },
       "performance": {
-        "durationMs": 2052.9849999999997,
-        "speedFactor": 23.887434150760967
+        "encodingTimeMs": 1865.3935,
+        "speedFactor": 26.289650950322276
       },
       "compression": {
-        "outputSize": 2142511,
         "ratio": 0.850718948123683,
         "reductionPercentage": 14.9281051876317
+      },
+      "quality": {
+        "vmaf": 96.270514
       },
       "output": {
         "codec": "h264",
@@ -48,13 +50,15 @@
         "outputPath": "output/x264-fast-crf23.mp4"
       },
       "performance": {
-        "durationMs": 1586.5284999999994,
-        "speedFactor": 30.910597571994458
+        "encodingTimeMs": 1785.9001000000007,
+        "speedFactor": 27.459847278131612
       },
       "compression": {
-        "outputSize": 2165751,
         "ratio": 0.8599467692897794,
         "reductionPercentage": 14.005323071022058
+      },
+      "quality": {
+        "vmaf": 95.731565
       },
       "output": {
         "codec": "h264",
@@ -75,13 +79,15 @@
         "outputPath": "output/x264-slow-crf23.mp4"
       },
       "performance": {
-        "durationMs": 2607.2827000000007,
-        "speedFactor": 18.809062784024142
+        "encodingTimeMs": 2750.1428000000014,
+        "speedFactor": 17.831999123827305
       },
       "compression": {
-        "outputSize": 2109242,
         "ratio": 0.8375089488820796,
         "reductionPercentage": 16.24910511179204
+      },
+      "quality": {
+        "vmaf": 96.240367
       },
       "output": {
         "codec": "h264",

@@ -6,6 +6,7 @@ import {
   BenchmarkFormatterImpl,
 } from './service/benchmark.service';
 import { JsonResultRepository } from './storage/result-repository';
+import { VmafAnalyserImpl } from './service/vmaf.service';
 
 async function main() {
   const inputPath = process.argv[2];
@@ -25,10 +26,11 @@ async function main() {
   const service = new BenchmarkService(
     new FfmpegRunnerImpl(),
     new MetadataReaderImpl(),
+    new VmafAnalyserImpl(),
     new BenchmarkFormatterImpl(),
   );
 
-  const results = await service.runAll(inputPath, config.benchmarks);
+  const results = await service.runAll(inputPath, config);
 
   const repo = new JsonResultRepository();
   await repo.save('results/result.json', results);

@@ -1,4 +1,5 @@
 {
+  "vmaf": false,
   "benchmarks": [
     {
       "name": "x264-medium-crf23",

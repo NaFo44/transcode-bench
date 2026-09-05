@@ -10,6 +10,7 @@ export const benchmarkConfigSchema = z.object({
 });
 
 export const configSchema = z.object({
+  vmaf: z.boolean(),
   benchmarks: z.array(benchmarkConfigSchema).min(1),
 });
 

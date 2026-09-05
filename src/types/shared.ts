@@ -24,3 +24,11 @@ export type MediaMetadata = {
   size: number;
   duration: number;
 };
+
+export type QualityScore = {
+  vmaf: number;
+};
+
+export interface QualityAnalyser {
+  analyse(referencePath: string, distortedPath: string): Promise<QualityScore>;
+}
