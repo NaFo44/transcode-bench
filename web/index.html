@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TranscodeBench</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <h1>FFmpeg Transcoding Benchmark</h1>
+      </div>
+    </header>
+    <main class="container">
+      <section class="benchmark-header">
+        <h3>
+          Input file: <span id="input-name">Loading...</span> (<span
+            id="input-size"
+            >Loading...</span
+          >)
+        </h3>
+      </section>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Codec</th>
+              <th>CRF</th>
+              <th>Preset</th>
+              <th>Output</th>
+              <th>Time</th>
+              <th>Reduction</th>
+            </tr>
+          </thead>
+
+          <tbody id="results-table">
+            <tr>
+              <td colspan="7">Loading...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -9,7 +9,7 @@
         "crf": 23,
         "preset": "medium",
         "outputPath": "output/x264-medium-crf23.mp4",
-        "durationMs": 1783.6222,
+        "durationMs": 1905.3463,
         "ratio": 0.850718948123683,
         "reductionPercentage": 14.93
       },
@@ -29,7 +29,7 @@
         "crf": 23,
         "preset": "fast",
         "outputPath": "output/x264-fast-crf23.mp4",
-        "durationMs": 1527.6622,
+        "durationMs": 1758.1779999999999,
         "ratio": 0.8599467692897794,
         "reductionPercentage": 14.01
       },
@@ -49,7 +49,7 @@
         "crf": 23,
         "preset": "slow",
         "outputPath": "output/x264-slow-crf23.mp4",
-        "durationMs": 2656.5479,
+        "durationMs": 2829.2104,
         "ratio": 0.8375089488820796,
         "reductionPercentage": 16.25
       },
