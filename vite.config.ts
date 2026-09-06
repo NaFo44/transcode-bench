@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite';
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   root: 'web',
+  base: command === 'build' ? '/transcode-bench/': '/',
 
   server: {
     proxy: {
@@ -11,4 +12,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

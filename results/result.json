@@ -21,8 +21,8 @@
         "outputPath": "output/x264-veryfast-crf23.mp4"
       },
       "performance": {
-        "encodingTimeMs": 854.4273000000001,
-        "speedFactor": 57.395806524440395
+        "encodingTimeMs": 891.9200999999999,
+        "speedFactor": 54.98311339771354
       },
       "compression": {
         "ratio": 0.677594461083729,
@@ -50,8 +50,8 @@
         "outputPath": "output/x264-fast-crf23.mp4"
       },
       "performance": {
-        "encodingTimeMs": 1534.6404999999995,
-        "speedFactor": 31.955721225915784
+        "encodingTimeMs": 1736.8395,
+        "speedFactor": 28.235507080533345
       },
       "compression": {
         "ratio": 0.8599467692897794,
@@ -79,8 +79,8 @@
         "outputPath": "output/x264-medium-crf23.mp4"
       },
       "performance": {
-        "encodingTimeMs": 1791.0698000000011,
-        "speedFactor": 27.380587847553436
+        "encodingTimeMs": 2170.2183000000005,
+        "speedFactor": 22.597055789272435
       },
       "compression": {
         "ratio": 0.850718948123683,
@@ -108,8 +108,8 @@
         "outputPath": "output/x264-slow-crf23.mp4"
       },
       "performance": {
-        "encodingTimeMs": 2755.7644,
-        "speedFactor": 17.795622876904858
+        "encodingTimeMs": 2845.577000000001,
+        "speedFactor": 17.233954308739484
       },
       "compression": {
         "ratio": 0.8375089488820796,
@@ -137,8 +137,8 @@
         "outputPath": "output/x264-veryslow-crf23.mp4"
       },
       "performance": {
-        "encodingTimeMs": 9603.558600000004,
-        "speedFactor": 5.106497085361667
+        "encodingTimeMs": 9362.165599999993,
+        "speedFactor": 5.238162418319115
       },
       "compression": {
         "ratio": 0.7725675618262032,
@@ -166,8 +166,8 @@
         "outputPath": "output/x264-medium-crf18.mp4"
       },
       "performance": {
-        "encodingTimeMs": 2167.930800000002,
-        "speedFactor": 22.620899154161172
+        "encodingTimeMs": 2119.3387000000002,
+        "speedFactor": 23.139550087015344
       },
       "compression": {
         "ratio": 1.3313585901922238,
@@ -195,8 +195,8 @@
         "outputPath": "output/x264-medium-crf28.mp4"
       },
       "performance": {
-        "encodingTimeMs": 1656.5699999999924,
-        "speedFactor": 29.603665405023765
+        "encodingTimeMs": 1711.3415999999997,
+        "speedFactor": 28.6561981547109
       },
       "compression": {
         "ratio": 0.5855810926550276,
@@ -224,8 +224,8 @@
         "outputPath": "output/x265-fast-crf23.mp4"
       },
       "performance": {
-        "encodingTimeMs": 4723.6054,
-        "speedFactor": 10.382015398661368
+        "encodingTimeMs": 4715.276100000003,
+        "speedFactor": 10.40035471093622
       },
       "compression": {
         "ratio": 0.6984317071747104,
@@ -253,8 +253,8 @@
         "outputPath": "output/x265-medium-crf23.mp4"
       },
       "performance": {
-        "encodingTimeMs": 7672.118700000006,
-        "speedFactor": 6.392047088635366
+        "encodingTimeMs": 6496.754799999995,
+        "speedFactor": 7.548467736538253
       },
       "compression": {
         "ratio": 0.7929263430073247,
@@ -282,8 +282,8 @@
         "outputPath": "output/x265-slow-crf23.mp4"
       },
       "performance": {
-        "encodingTimeMs": 18976.9534,
-        "speedFactor": 2.5842158625946774
+        "encodingTimeMs": 15273.0763,
+        "speedFactor": 3.210914621044615
       },
       "compression": {
         "ratio": 0.8481483407988418,
@@ -311,8 +311,8 @@
         "outputPath": "output/x265-medium-crf28.mp4"
       },
       "performance": {
-        "encodingTimeMs": 5426.851399999985,
-        "speedFactor": 9.036647659082783
+        "encodingTimeMs": 4850.0738999999885,
+        "speedFactor": 10.111298304135142
       },
       "compression": {
         "ratio": 0.5046534186814142,
@@ -340,8 +340,8 @@
         "outputPath": "output/x265-medium-crf30.mp4"
       },
       "performance": {
-        "encodingTimeMs": 4658.95140000002,
-        "speedFactor": 10.526090484652787
+        "encodingTimeMs": 4368.5962,
+        "speedFactor": 11.225698543619114
       },
       "compression": {
         "ratio": 0.4392820088061367,
