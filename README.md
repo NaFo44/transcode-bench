@@ -6,6 +6,8 @@ A video transcoding benchmark that makes it easy to compare FFmpeg configuration
 
 ![Running a benchmark and displaying the results](usage.gif)
 
+## Preview link: https://nafo44.github.io/transcode-bench/
+or
 **[Try it locally](#quick-start)**
 
 ## Quick start
