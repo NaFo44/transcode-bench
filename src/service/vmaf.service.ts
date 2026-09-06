@@ -34,7 +34,7 @@ export class VmafAnalyserImpl implements QualityAnalyser {
 
     const raw = await Bun.file(logPath).json();
     const parsed = vmafOutputSchema.parse(raw);
-    
+
     const score = parsed.pooled_metrics.vmaf.mean;
 
     await unlink(logPath);

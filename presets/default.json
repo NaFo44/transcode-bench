@@ -1,11 +1,11 @@
 {
-  "vmaf": false,
+  "vmaf": true,
   "benchmarks": [
     {
-      "name": "x264-medium-crf23",
+      "name": "x264-veryfast-crf23",
       "codec": "libx264",
       "crf": 23,
-      "preset": "medium"
+      "preset": "veryfast"
     },
     {
       "name": "x264-fast-crf23",
@@ -14,10 +14,64 @@
       "preset": "fast"
     },
     {
+      "name": "x264-medium-crf23",
+      "codec": "libx264",
+      "crf": 23,
+      "preset": "medium"
+    },
+    {
       "name": "x264-slow-crf23",
       "codec": "libx264",
       "crf": 23,
       "preset": "slow"
+    },
+    {
+      "name": "x264-veryslow-crf23",
+      "codec": "libx264",
+      "crf": 23,
+      "preset": "veryslow"
+    },
+    {
+      "name": "x264-medium-crf18",
+      "codec": "libx264",
+      "crf": 18,
+      "preset": "medium"
+    },
+    {
+      "name": "x264-medium-crf28",
+      "codec": "libx264",
+      "crf": 28,
+      "preset": "medium"
+    },
+    {
+      "name": "x265-fast-crf23",
+      "codec": "libx265",
+      "crf": 23,
+      "preset": "fast"
+    },
+    {
+      "name": "x265-medium-crf23",
+      "codec": "libx265",
+      "crf": 23,
+      "preset": "medium"
+    },
+    {
+      "name": "x265-slow-crf23",
+      "codec": "libx265",
+      "crf": 23,
+      "preset": "slow"
+    },
+    {
+      "name": "x265-medium-crf28",
+      "codec": "libx265",
+      "crf": 28,
+      "preset": "medium"
+    },
+    {
+      "name": "x265-medium-crf30",
+      "codec": "libx265",
+      "crf": 30,
+      "preset": "medium"
     }
   ]
 }

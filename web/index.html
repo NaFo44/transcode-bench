@@ -3,45 +3,245 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>TranscodeBench</title>
   </head>
+
   <body>
-    <header class="header">
-      <div class="container">
-        <h1>FFmpeg Transcoding Benchmark</h1>
-      </div>
-    </header>
     <main class="container">
-      <section class="benchmark-header">
-        <h3>
-          Input file: <span id="input-name">Loading...</span> (<span
-            id="input-size"
-            >Loading...</span
-          >)
-        </h3>
+      <header class="input-summary">
+        <div class="input-heading">
+          <h1>TranscodeBench</h1>
+          <p>Input: <span id="input-file">Loading...</span></p>
+        </div>
+
+        <div class="input-metadata">
+          <span id="input-resolution">Loading...</span>
+          <span id="input-codec">Loading...</span>
+          <span id="input-fps">Loading...</span>
+          <span id="input-size">Loading...</span>
+          <span id="input-duration">Loading...</span>
+        </div>
+      </header>
+
+      <hr>
+
+      <section class="stats" aria-label="Benchmark summary">
+        <article class="stat-card">
+          <span>Benchmarks</span>
+          <strong id="benchmark-count">Loading...</strong>
+        </article>
+
+        <article class="stat-card">
+          <span>Best quality</span>
+          <strong id="best-quality">Loading...</strong>
+        </article>
+
+        <article class="stat-card">
+          <span>Smallest</span>
+          <strong id="smallest-output">Loading...</strong>
+        </article>
+
+        <article class="stat-card">
+          <span>Fastest</span>
+          <strong id="fastest">Loading...</strong>
+        </article>
       </section>
 
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Codec</th>
-              <th>CRF</th>
-              <th>Preset</th>
-              <th>Output</th>
-              <th>Time</th>
-              <th>Reduction</th>
-            </tr>
-          </thead>
+      <hr>
 
-          <tbody id="results-table">
-            <tr>
-              <td colspan="7">Loading...</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <section aria-label="Benchmark results">
+        <nav class="tabs" aria-label="Benchmark views">
+          <button class="tab-button active" type="button" data-tab="results">
+            Results
+          </button>
+
+          <button
+            class="tab-button"
+            type="button"
+            data-tab="quality-size"
+            data-requires-vmaf
+          >
+            Quality / Size
+          </button>
+
+          <button class="tab-button" type="button" data-tab="size-time">
+            Size / Time
+          </button>
+
+          <button
+            class="tab-button"
+            type="button"
+            data-tab="time-quality"
+            data-requires-vmaf
+          >
+            Time / Quality
+          </button>
+
+          <button class="tab-button" type="button" data-tab="speed">
+            Speed
+          </button>
+
+          <button class="tab-button" type="button" data-tab="size">
+            Output Size
+          </button>
+
+          <button class="tab-button" type="button" data-tab="bitrate">
+            Bitrate
+          </button>
+
+          <button
+            class="tab-button"
+            type="button"
+            data-tab="best-overall"
+            data-requires-vmaf
+          >
+            Best overall
+          </button>
+        </nav>
+
+        <div class="tab-panel" data-panel="results">
+          <div class="panel-header">
+            <h2>Benchmark results</h2>
+
+            <p>Detailed results for each configuration.</p>
+          </div>
+
+          <div class="table-container">
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th scope="col">Configuration</th>
+                  <th scope="col">Codec</th>
+                  <th scope="col">CRF</th>
+                  <th scope="col">Preset</th>
+                  <th scope="col">Output</th>
+                  <th scope="col">VMAF</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Speed</th>
+                  <th scope="col">Reduction</th>
+                  <th scope="col">Bitrate</th>
+                </tr>
+              </thead>
+
+              <tbody id="results-table">
+                <tr>
+                  <td colspan="10">Loading...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="quality-size" hidden>
+          <div class="panel-header">
+            <h2>Quality vs size</h2>
+
+            <p>VMAF compared with output file size.</p>
+          </div>
+
+          <div class="chart">
+            <canvas
+              id="chart-quality-size"
+              role="img"
+              aria-label="Quality versus output size chart"
+            ></canvas>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="size-time" hidden>
+          <div class="panel-header">
+            <h2>Size vs encoding time</h2>
+
+            <p>Output size compared with encoding duration.</p>
+          </div>
+
+          <div class="chart">
+            <canvas
+              id="chart-size-time"
+              role="img"
+              aria-label="Output size versus encoding time chart"
+            ></canvas>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="time-quality" hidden>
+          <div class="panel-header">
+            <h2>Encoding time vs quality</h2>
+
+            <p>Encoding duration compared with VMAF.</p>
+          </div>
+
+          <div class="chart">
+            <canvas
+              id="chart-time-quality"
+              role="img"
+              aria-label="Encoding time versus quality chart"
+            ></canvas>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="speed" hidden>
+          <div class="panel-header">
+            <h2>Encoding speed</h2>
+
+            <p>Realtime encoding speed per configuration.</p>
+          </div>
+
+          <div class="chart">
+            <canvas
+              id="chart-speed"
+              role="img"
+              aria-label="Encoding speed chart"
+            ></canvas>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="size" hidden>
+          <div class="panel-header">
+            <h2>Output size</h2>
+
+            <p>Compressed output size per configuration.</p>
+          </div>
+
+          <div class="chart">
+            <canvas
+              id="chart-size"
+              role="img"
+              aria-label="Output size chart"
+            ></canvas>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="bitrate" hidden>
+          <div class="panel-header">
+            <h2>Bitrate</h2>
+
+            <p>Average output bitrate per configuration.</p>
+          </div>
+
+          <div class="chart">
+            <canvas
+              id="chart-bitrate"
+              role="img"
+              aria-label="Output bitrate chart"
+            ></canvas>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="best-overall" hidden>
+          <div class="panel-header">
+            <h2>Best overall configuration</h2>
+            <p>50% quality, 30% size, 20% encoding speed.</p>
+          </div>
+
+          <article class="overall-card">
+            <strong id="overall-name">Loading...</strong>
+            <span id="overall-score"></span>
+            <span id="overall-details"></span>
+          </article>
+        </div>
+      </section>
     </main>
 
     <script type="module" src="/src/main.ts"></script>
