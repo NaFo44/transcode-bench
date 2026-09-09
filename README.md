@@ -6,11 +6,19 @@ A video transcoding benchmark that makes it easy to compare FFmpeg configuration
 
 ![Running a benchmark and displaying the results](usage.gif)
 
-## Preview link: https://nafo44.github.io/transcode-bench/
+**Preview link: https://nafo44.github.io/transcode-bench/**
 or
 **[Try it locally](#quick-start)**
 
 ## Quick start
+
+- Download the correct archive for your OS: https://github.com/NaFo44/transcode-bench/releases/tag/v1.0.0
+- Extract the archive
+- Open a terminal at the project root
+- Run `transcode_benchmark path/to/video.mp4`
+- If it does not open automatically, open the dashboard once the benchmark is complete: http://127.0.0.1:3000/
+  
+## Quick start for devs
 
 The repository includes sample benchmark results, so you can explore the dashboard without running a new transcode first.
 
